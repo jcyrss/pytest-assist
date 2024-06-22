@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Report</title>   
+    
+    <style>
+
+      code[class*=language-],pre[class*=language-]{color:#403a3a;background:0 0;
+        text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;
+        white-space:pre-wrap;word-spacing:normal;word-break:break-word;word-wrap:normal;
+        line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none
+      }
+      code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f9f3f3}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.builtin{color:#c10b0b}.token.attr-name,.token.char,.token.inserted,.token.selector,.token.string{color:#3a8f31}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}
+    
+     
+      input[type='checkbox']{    
+        accent-color: #2196f3;
+      }
+      
+      img {
+        width: 100%;
+      }
+
+      .prespace {
+        white-space: pre; 
+      }
+      
+      body{
+        height: 100vh;
+        margin: 0;
+        font-family: "Roboto Mono", SFMono-Regular, Consolas, Monaco, "Ubuntu Mono", "DejaVu Sans Mono", Menlo, '微软雅黑', monospace;;      
+      }   
+
+      
+      /* 主内容区 */
+      main{
+        background: #fefefe;
+        font-size: .9rem;
+        color: #46494d;
+
+      }
+      
+      .test-session {    
+        padding: 0rem;
+      }
+
+
+
+      .test-summary-zone {
+        display: grid;  
+        grid-template-columns: 2fr 3fr auto;
+        gap: 1em;
+        /* padding-bottom: 2rem; */  
+        padding: 1rem 3rem;
+      }
+
+      .test-summary-zone .left, .test-summary-zone .mid, .test-summary-zone .right{
+        display: flex;  
+        flex-direction: column;
+        justify-content: center;
+        gap: 1em;
+      }
+
+
+      .test-result-zone {
+        display: grid;  
+        grid-template-columns: 1fr;
+        gap: 2em;
+        color: #46494d;
+        padding: 1rem;
+      }
+
+      .test-result {  
+        background-color: #fafafa;
+        border: 1px solid #91bacd;
+        white-space: pre-wrap;
+
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+      }
+
+      
+      .test-nodeid{
+        color: #8a9195;
+        font-weight: bold;
+        cursor: pointer;
+        padding: .5rem;
+
+        display: flex;
+        gap: .5rem;
+        justify-content: space-between;
+      }
+
+
+      .test-nodeid.passed{
+        color: #2b953c;
+      }
+
+      .test-nodeid.t_error{
+        color: #6fa2be;
+      }
+
+
+      .test-nodeid.failed{
+        color: #ca4d4d;
+      }
+
+      .test-nodeid.s_error{
+        color: #9568b3;
+      }
+
+
+
+      .test-nodeid .duration{
+        text-align: right;
+      }
+
+
+      .test-result .details{
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+        padding: .5rem;
+      }
+
+      .test-result .output{
+        padding: 1rem;
+        background: #ececec;
+      }
+
+      .test-result .report{
+        margin: .5px 0;
+        flex-grow: 1;
+        border: 1px solid #b9d0b9;
+      }
+
+      .test-result .report .report-title{
+        background-color: #f2f8f6;
+        color: #388185;
+        padding: .3rem;
+          
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+
+      .test-result .report .logs{ 
+        padding: 1rem;
+        
+        white-space: pre-wrap
+      }
+
+
+    </style>
+
+
+  </head>
+  <body>  
+     
+
+    <main></main>   
+
+  </body>
+
+</html>  
+  
+<script id="libs">
+// prism
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(e){var n=/(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i,t=0,r={},a={manual:e.Prism&&e.Prism.manual,disableWorkerMessageHandler:e.Prism&&e.Prism.disableWorkerMessageHandler,util:{encode:function e(n){return n instanceof i?new i(n.type,e(n.content),n.alias):Array.isArray(n)?n.map(e):n.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).slice(8,-1)},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function e(n,t){var r,i;switch(t=t||{},a.util.type(n)){case"Object":if(i=a.util.objId(n),t[i])return t[i];for(var l in r={},t[i]=r,n)n.hasOwnProperty(l)&&(r[l]=e(n[l],t));return r;case"Array":return i=a.util.objId(n),t[i]?t[i]:(r=[],t[i]=r,n.forEach((function(n,a){r[a]=e(n,t)})),r);default:return n}},getLanguage:function(e){for(;e;){var t=n.exec(e.className);if(t)return t[1].toLowerCase();e=e.parentElement}return"none"},setLanguage:function(e,t){e.className=e.className.replace(RegExp(n,"gi"),""),e.classList.add("language-"+t)},currentScript:function(){if("undefined"==typeof document)return null;if("currentScript"in document)return document.currentScript;try{throw new Error}catch(r){var e=(/at [^(\r\n]*\((.*):[^:]+:[^:]+\)$/i.exec(r.stack)||[])[1];if(e){var n=document.getElementsByTagName("script");for(var t in n)if(n[t].src==e)return n[t]}return null}},isActive:function(e,n,t){for(var r="no-"+n;e;){var a=e.classList;if(a.contains(n))return!0;if(a.contains(r))return!1;e=e.parentElement}return!!t}},languages:{plain:r,plaintext:r,text:r,txt:r,extend:function(e,n){var t=a.util.clone(a.languages[e]);for(var r in n)t[r]=n[r];return t},insertBefore:function(e,n,t,r){var i=(r=r||a.languages)[e],l={};for(var o in i)if(i.hasOwnProperty(o)){if(o==n)for(var s in t)t.hasOwnProperty(s)&&(l[s]=t[s]);t.hasOwnProperty(o)||(l[o]=i[o])}var u=r[e];return r[e]=l,a.languages.DFS(a.languages,(function(n,t){t===u&&n!=e&&(this[n]=l)})),l},DFS:function e(n,t,r,i){i=i||{};var l=a.util.objId;for(var o in n)if(n.hasOwnProperty(o)){t.call(n,o,n[o],r||o);var s=n[o],u=a.util.type(s);"Object"!==u||i[l(s)]?"Array"!==u||i[l(s)]||(i[l(s)]=!0,e(s,t,o,i)):(i[l(s)]=!0,e(s,t,null,i))}}},plugins:{},highlightAll:function(e,n){a.highlightAllUnder(document,e,n)},highlightAllUnder:function(e,n,t){var r={callback:t,container:e,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};a.hooks.run("before-highlightall",r),r.elements=Array.prototype.slice.apply(r.container.querySelectorAll(r.selector)),a.hooks.run("before-all-elements-highlight",r);for(var i,l=0;i=r.elements[l++];)a.highlightElement(i,!0===n,r.callback)},highlightElement:function(n,t,r){var i=a.util.getLanguage(n),l=a.languages[i];a.util.setLanguage(n,i);var o=n.parentElement;o&&"pre"===o.nodeName.toLowerCase()&&a.util.setLanguage(o,i);var s={element:n,language:i,grammar:l,code:n.textContent};function u(e){s.highlightedCode=e,a.hooks.run("before-insert",s),s.element.innerHTML=s.highlightedCode,a.hooks.run("after-highlight",s),a.hooks.run("complete",s),r&&r.call(s.element)}if(a.hooks.run("before-sanity-check",s),(o=s.element.parentElement)&&"pre"===o.nodeName.toLowerCase()&&!o.hasAttribute("tabindex")&&o.setAttribute("tabindex","0"),!s.code)return a.hooks.run("complete",s),void(r&&r.call(s.element));if(a.hooks.run("before-highlight",s),s.grammar)if(t&&e.Worker){var c=new Worker(a.filename);c.onmessage=function(e){u(e.data)},c.postMessage(JSON.stringify({language:s.language,code:s.code,immediateClose:!0}))}else u(a.highlight(s.code,s.grammar,s.language));else u(a.util.encode(s.code))},highlight:function(e,n,t){var r={code:e,grammar:n,language:t};if(a.hooks.run("before-tokenize",r),!r.grammar)throw new Error('The language "'+r.language+'" has no grammar.');return r.tokens=a.tokenize(r.code,r.grammar),a.hooks.run("after-tokenize",r),i.stringify(a.util.encode(r.tokens),r.language)},tokenize:function(e,n){var t=n.rest;if(t){for(var r in t)n[r]=t[r];delete n.rest}var a=new s;return u(a,a.head,e),o(e,a,n,a.head,0),function(e){for(var n=[],t=e.head.next;t!==e.tail;)n.push(t.value),t=t.next;return n}(a)},hooks:{all:{},add:function(e,n){var t=a.hooks.all;t[e]=t[e]||[],t[e].push(n)},run:function(e,n){var t=a.hooks.all[e];if(t&&t.length)for(var r,i=0;r=t[i++];)r(n)}},Token:i};function i(e,n,t,r){this.type=e,this.content=n,this.alias=t,this.length=0|(r||"").length}function l(e,n,t,r){e.lastIndex=n;var a=e.exec(t);if(a&&r&&a[1]){var i=a[1].length;a.index+=i,a[0]=a[0].slice(i)}return a}function o(e,n,t,r,s,g){for(var f in t)if(t.hasOwnProperty(f)&&t[f]){var h=t[f];h=Array.isArray(h)?h:[h];for(var d=0;d<h.length;++d){if(g&&g.cause==f+","+d)return;var v=h[d],p=v.inside,m=!!v.lookbehind,y=!!v.greedy,k=v.alias;if(y&&!v.pattern.global){var x=v.pattern.toString().match(/[imsuy]*$/)[0];v.pattern=RegExp(v.pattern.source,x+"g")}for(var b=v.pattern||v,w=r.next,A=s;w!==n.tail&&!(g&&A>=g.reach);A+=w.value.length,w=w.next){var E=w.value;if(n.length>e.length)return;if(!(E instanceof i)){var P,L=1;if(y){if(!(P=l(b,A,e,m))||P.index>=e.length)break;var S=P.index,O=P.index+P[0].length,j=A;for(j+=w.value.length;S>=j;)j+=(w=w.next).value.length;if(A=j-=w.value.length,w.value instanceof i)continue;for(var C=w;C!==n.tail&&(j<O||"string"==typeof C.value);C=C.next)L++,j+=C.value.length;L--,E=e.slice(A,j),P.index-=A}else if(!(P=l(b,0,E,m)))continue;S=P.index;var N=P[0],_=E.slice(0,S),M=E.slice(S+N.length),W=A+E.length;g&&W>g.reach&&(g.reach=W);var z=w.prev;if(_&&(z=u(n,z,_),A+=_.length),c(n,z,L),w=u(n,z,new i(f,p?a.tokenize(N,p):N,k,N)),M&&u(n,w,M),L>1){var I={cause:f+","+d,reach:W};o(e,n,t,w.prev,A,I),g&&I.reach>g.reach&&(g.reach=I.reach)}}}}}}function s(){var e={value:null,prev:null,next:null},n={value:null,prev:e,next:null};e.next=n,this.head=e,this.tail=n,this.length=0}function u(e,n,t){var r=n.next,a={value:t,prev:n,next:r};return n.next=a,r.prev=a,e.length++,a}function c(e,n,t){for(var r=n.next,a=0;a<t&&r!==e.tail;a++)r=r.next;n.next=r,r.prev=n,e.length-=a}if(e.Prism=a,i.stringify=function e(n,t){if("string"==typeof n)return n;if(Array.isArray(n)){var r="";return n.forEach((function(n){r+=e(n,t)})),r}var i={type:n.type,content:e(n.content,t),tag:"span",classes:["token",n.type],attributes:{},language:t},l=n.alias;l&&(Array.isArray(l)?Array.prototype.push.apply(i.classes,l):i.classes.push(l)),a.hooks.run("wrap",i);var o="";for(var s in i.attributes)o+=" "+s+'="'+(i.attributes[s]||"").replace(/"/g,"&quot;")+'"';return"<"+i.tag+' class="'+i.classes.join(" ")+'"'+o+">"+i.content+"</"+i.tag+">"},!e.document)return e.addEventListener?(a.disableWorkerMessageHandler||e.addEventListener("message",(function(n){var t=JSON.parse(n.data),r=t.language,i=t.code,l=t.immediateClose;e.postMessage(a.highlight(i,a.languages[r],r)),l&&e.close()}),!1),a):a;var g=a.util.currentScript();function f(){a.manual||a.highlightAll()}if(g&&(a.filename=g.src,g.hasAttribute("data-manual")&&(a.manual=!0)),!a.manual){var h=document.readyState;"loading"===h||"interactive"===h&&g&&g.defer?document.addEventListener("DOMContentLoaded",f):window.requestAnimationFrame?window.requestAnimationFrame(f):window.setTimeout(f,16)}return a}(_self);"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0,greedy:!0},"string-interpolation":{pattern:/(?:f|fr|rf)(?:("""|''')[\s\S]*?\1|("|')(?:\\.|(?!\2)[^\\\r\n])*\2)/i,greedy:!0,inside:{interpolation:{pattern:/((?:^|[^{])(?:\{\{)*)\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}]|\{(?!\{)(?:[^{}])+\})+\})+\}/,lookbehind:!0,inside:{"format-spec":{pattern:/(:)[^:(){}]+(?=\}$)/,lookbehind:!0},"conversion-option":{pattern:/![sra](?=[:}]$)/,alias:"punctuation"},rest:null}},string:/[\s\S]+/}},"triple-quoted-string":{pattern:/(?:[rub]|br|rb)?("""|''')[\s\S]*?\1/i,greedy:!0,alias:"string"},string:{pattern:/(?:[rub]|br|rb)?("|')(?:\\.|(?!\1)[^\\\r\n])*\1/i,greedy:!0},function:{pattern:/((?:^|\s)def[ \t]+)[a-zA-Z_]\w*(?=\s*\()/g,lookbehind:!0},"class-name":{pattern:/(\bclass\s+)\w+/i,lookbehind:!0},decorator:{pattern:/(^[\t ]*)@\w+(?:\.\w+)*/m,lookbehind:!0,alias:["annotation","punctuation"],inside:{punctuation:/\./}},keyword:/\b(?:_(?=\s*:)|and|as|assert|async|await|break|case|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|match|nonlocal|not|or|pass|print|raise|return|try|while|with|yield)\b/,builtin:/\b(?:__import__|abs|all|any|apply|ascii|basestring|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|complex|delattr|dict|dir|divmod|enumerate|eval|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\b/,boolean:/\b(?:False|None|True)\b/,number:/\b0(?:b(?:_?[01])+|o(?:_?[0-7])+|x(?:_?[a-f0-9])+)\b|(?:\b\d+(?:_\d+)*(?:\.(?:\d+(?:_\d+)*)?)?|\B\.\d+(?:_\d+)*)(?:e[+-]?\d+(?:_\d+)*)?j?(?!\w)/i,operator:/[-+%=]=?|!=|:=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,punctuation:/[{}[\];(),.:]/},Prism.languages.python["string-interpolation"].inside.interpolation.inside.rest=Prism.languages.python,Prism.languages.py=Prism.languages.python;  
+// preact, refer to https://github.com/preactjs/preact/issues/2719#issuecomment-681094811
+!function(n){"function"==typeof define&&define.amd?define(n):n()}(function(){var n,l,t,u,i,o,e,r,f,c,a,s,h,p=65536,v=1<<17,d={},y=[],w=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i,_=Array.isArray;function m(n,l){for(var t in l)n[t]=l[t];return n}function g(n){var l=n.parentNode;l&&l.removeChild(n)}function k(l,t,u){var i,o,e,r={};for(e in t)"key"==e?i=t[e]:"ref"==e?o=t[e]:r[e]=t[e];if(arguments.length>2&&(r.children=arguments.length>3?n.call(arguments,2):u),"function"==typeof l&&null!=l.defaultProps)for(e in l.defaultProps)void 0===r[e]&&(r[e]=l.defaultProps[e]);return b(l,r,i,o,null)}function b(n,u,i,o,e){var r={type:n,props:u,key:i,ref:o,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,constructor:void 0,__v:null==e?++t:e,__i:-1,__u:0};return null==e&&null!=l.vnode&&l.vnode(r),r}function C(n){return n.children}function x(n,l){this.props=n,this.context=l}function M(n,l){if(null==l)return n.__?M(n.__,n.__i+1):null;for(var t;l<n.__k.length;l++)if(null!=(t=n.__k[l])&&null!=t.__e)return t.__e;return"function"==typeof n.type?M(n):null}function P(n){var l,t;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(t=n.__k[l])&&null!=t.__e){n.__e=n.__c.base=t.__e;break}return P(n)}}function S(n){(!n.__d&&(n.__d=!0)&&i.push(n)&&!$.__r++||o!==l.debounceRendering)&&((o=l.debounceRendering)||e)($)}function $(){var n,t,u,o,e,f,c,a;for(i.sort(r);n=i.shift();)n.__d&&(t=i.length,o=void 0,f=(e=(u=n).__v).__e,c=[],a=[],u.__P&&((o=m({},e)).__v=e.__v+1,l.vnode&&l.vnode(o),O(u.__P,o,e,u.__n,u.__P.namespaceURI,32&e.__u?[f]:null,c,null==f?M(e):f,!!(32&e.__u),a),o.__v=e.__v,o.__.__k[o.__i]=o,V(c,o,a),o.__e!=f&&P(o)),i.length>t&&i.sort(r));$.__r=0}function I(n,l,t,u,i,o,e,r,f,c,a){var s,h,v,w,_,m=u&&u.__k||y,g=l.length;for(t.__d=f,A(t,l,m),f=t.__d,s=0;s<g;s++)null!=(v=t.__k[s])&&"boolean"!=typeof v&&"function"!=typeof v&&(h=-1===v.__i?d:m[v.__i]||d,v.__i=s,O(n,v,h,i,o,e,r,f,c,a),w=v.__e,v.ref&&h.ref!=v.ref&&(h.ref&&z(h.ref,null,v),a.push(v.ref,v.__c||w,v)),null==_&&null!=w&&(_=w),v.__u&p||h.__k===v.__k?(f&&!f.isConnected&&(f=M(h)),f=E(v,f,n)):"function"==typeof v.type&&void 0!==v.__d?f=v.__d:w&&(f=w.nextSibling),v.__d=void 0,v.__u&=-196609);t.__d=f,t.__e=_}function A(n,l,t){var u,i,o,e,r,f=l.length,c=t.length,a=c,s=0;for(n.__k=[],u=0;u<f;u++)e=u+s,null!=(i=n.__k[u]=null==(i=l[u])||"boolean"==typeof i||"function"==typeof i?null:"string"==typeof i||"number"==typeof i||"bigint"==typeof i||i.constructor==String?b(null,i,null,null,null):_(i)?b(C,{children:i},null,null,null):void 0===i.constructor&&i.__b>0?b(i.type,i.props,i.key,i.ref?i.ref:null,i.__v):i)?(i.__=n,i.__b=n.__b+1,r=F(i,t,e,a),i.__i=r,o=null,-1!==r&&(a--,(o=t[r])&&(o.__u|=v)),null==o||null===o.__v?(-1==r&&s--,"function"!=typeof i.type&&(i.__u|=p)):r!==e&&(r===e+1?s++:r>e?a>f-e?s+=r-e:s--:r<e?r==e-1&&(s=r-e):s=0,r!==u+s&&(i.__u|=p))):(o=t[e])&&null==o.key&&o.__e&&0==(o.__u&v)&&(o.__e==n.__d&&(n.__d=M(o)),N(o,o,!1),t[e]=null,a--);if(a)for(u=0;u<c;u++)null!=(o=t[u])&&0==(o.__u&v)&&(o.__e==n.__d&&(n.__d=M(o)),N(o,o))}function E(n,l,t){var u,i;if("function"==typeof n.type){for(u=n.__k,i=0;u&&i<u.length;i++)u[i]&&(u[i].__=n,l=E(u[i],l,t));return l}n.__e!=l&&(t.insertBefore(n.__e,l||null),l=n.__e);do{l=l&&l.nextSibling}while(null!=l&&8===l.nodeType);return l}function F(n,l,t,u){var i=n.key,o=n.type,e=t-1,r=t+1,f=l[t];if(null===f||f&&i==f.key&&o===f.type&&0==(f.__u&v))return t;if(u>(null!=f&&0==(f.__u&v)?1:0))for(;e>=0||r<l.length;){if(e>=0){if((f=l[e])&&0==(f.__u&v)&&i==f.key&&o===f.type)return e;e--}if(r<l.length){if((f=l[r])&&0==(f.__u&v)&&i==f.key&&o===f.type)return r;r++}}return-1}function H(n,l,t){"-"===l[0]?n.setProperty(l,null==t?"":t):n[l]=null==t?"":"number"!=typeof t||w.test(l)?t:t+"px"}function L(n,l,t,u,i){var o;n:if("style"===l)if("string"==typeof t)n.style.cssText=t;else{if("string"==typeof u&&(n.style.cssText=u=""),u)for(l in u)t&&l in t||H(n.style,l,"");if(t)for(l in t)u&&t[l]===u[l]||H(n.style,l,t[l])}else if("o"===l[0]&&"n"===l[1])o=l!==(l=l.replace(/(PointerCapture)$|Capture$/i,"$1")),l=l.toLowerCase()in n||"onFocusOut"===l||"onFocusIn"===l?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+o]=t,t?u?t.t=u.t:(t.t=f,n.addEventListener(l,o?a:c,o)):n.removeEventListener(l,o?a:c,o);else{if("http://www.w3.org/2000/svg"==i)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!=l&&"height"!=l&&"href"!=l&&"list"!=l&&"form"!=l&&"tabIndex"!=l&&"download"!=l&&"rowSpan"!=l&&"colSpan"!=l&&"role"!=l&&l in n)try{n[l]=null==t?"":t;break n}catch(n){}"function"==typeof t||(null==t||!1===t&&"-"!==l[4]?n.removeAttribute(l):n.setAttribute(l,t))}}function T(n){return function(t){if(this.l){var u=this.l[t.type+n];if(null==t.u)t.u=f++;else if(t.u<u.t)return;return u(l.event?l.event(t):t)}}}function O(n,t,u,i,o,e,r,f,c,a){var s,h,p,v,d,y,w,g,k,b,M,P,S,$,A,E=t.type;if(void 0!==t.constructor)return null;128&u.__u&&(c=!!(32&u.__u),e=[f=t.__e=u.__e]),(s=l.__b)&&s(t);n:if("function"==typeof E)try{if(g=t.props,k=(s=E.contextType)&&i[s.__c],b=s?k?k.props.value:s.__:i,u.__c?w=(h=t.__c=u.__c).__=h.__E:("prototype"in E&&E.prototype.render?t.__c=h=new E(g,b):(t.__c=h=new x(g,b),h.constructor=E,h.render=R),k&&k.sub(h),h.props=g,h.state||(h.state={}),h.context=b,h.__n=i,p=h.__d=!0,h.__h=[],h._sb=[]),null==h.__s&&(h.__s=h.state),null!=E.getDerivedStateFromProps&&(h.__s==h.state&&(h.__s=m({},h.__s)),m(h.__s,E.getDerivedStateFromProps(g,h.__s))),v=h.props,d=h.state,h.__v=t,p)null==E.getDerivedStateFromProps&&null!=h.componentWillMount&&h.componentWillMount(),null!=h.componentDidMount&&h.__h.push(h.componentDidMount);else{if(null==E.getDerivedStateFromProps&&g!==v&&null!=h.componentWillReceiveProps&&h.componentWillReceiveProps(g,b),!h.__e&&(null!=h.shouldComponentUpdate&&!1===h.shouldComponentUpdate(g,h.__s,b)||t.__v===u.__v)){for(t.__v!==u.__v&&(h.props=g,h.state=h.__s,h.__d=!1),t.__e=u.__e,t.__k=u.__k,t.__k.forEach(function(n){n&&(n.__=t)}),M=0;M<h._sb.length;M++)h.__h.push(h._sb[M]);h._sb=[],h.__h.length&&r.push(h);break n}null!=h.componentWillUpdate&&h.componentWillUpdate(g,h.__s,b),null!=h.componentDidUpdate&&h.__h.push(function(){h.componentDidUpdate(v,d,y)})}if(h.context=b,h.props=g,h.__P=n,h.__e=!1,P=l.__r,S=0,"prototype"in E&&E.prototype.render){for(h.state=h.__s,h.__d=!1,P&&P(t),s=h.render(h.props,h.state,h.context),$=0;$<h._sb.length;$++)h.__h.push(h._sb[$]);h._sb=[]}else do{h.__d=!1,P&&P(t),s=h.render(h.props,h.state,h.context),h.state=h.__s}while(h.__d&&++S<25);h.state=h.__s,null!=h.getChildContext&&(i=m(m({},i),h.getChildContext())),p||null==h.getSnapshotBeforeUpdate||(y=h.getSnapshotBeforeUpdate(v,d)),I(n,_(A=null!=s&&s.type===C&&null==s.key?s.props.children:s)?A:[A],t,u,i,o,e,r,f,c,a),h.base=t.__e,t.__u&=-161,h.__h.length&&r.push(h),w&&(h.__E=h.__=null)}catch(n){t.__v=null,c||null!=e?(t.__e=f,t.__u|=c?160:32,e[e.indexOf(f)]=null):(t.__e=u.__e,t.__k=u.__k),l.__e(n,t,u)}else null==e&&t.__v===u.__v?(t.__k=u.__k,t.__e=u.__e):t.__e=j(u.__e,t,u,i,o,e,r,c,a);(s=l.diffed)&&s(t)}function V(n,t,u){t.__d=void 0;for(var i=0;i<u.length;i++)z(u[i],u[++i],u[++i]);l.__c&&l.__c(t,n),n.some(function(t){try{n=t.__h,t.__h=[],n.some(function(n){n.call(t)})}catch(n){l.__e(n,t.__v)}})}function j(l,t,u,i,o,e,r,f,c){var a,s,h,p,v,y,w,m=u.props,k=t.props,b=t.type;if("svg"===b?o="http://www.w3.org/2000/svg":"math"===b?o="http://www.w3.org/1998/Math/MathML":o||(o="http://www.w3.org/1999/xhtml"),null!=e)for(a=0;a<e.length;a++)if((v=e[a])&&"setAttribute"in v==!!b&&(b?v.localName===b:3===v.nodeType)){l=v,e[a]=null;break}if(null==l){if(null===b)return document.createTextNode(k);l=document.createElementNS(o,b,k.is&&k),e=null,f=!1}if(null===b)m===k||f&&l.data===k||(l.data=k);else{if(e=e&&n.call(l.childNodes),m=u.props||d,!f&&null!=e)for(m={},a=0;a<l.attributes.length;a++)m[(v=l.attributes[a]).name]=v.value;for(a in m)if(v=m[a],"children"==a);else if("dangerouslySetInnerHTML"==a)h=v;else if("key"!==a&&!(a in k)){if("value"==a&&"defaultValue"in k||"checked"==a&&"defaultChecked"in k)continue;L(l,a,null,v,o)}for(a in k)v=k[a],"children"==a?p=v:"dangerouslySetInnerHTML"==a?s=v:"value"==a?y=v:"checked"==a?w=v:"key"===a||f&&"function"!=typeof v||m[a]===v||L(l,a,v,m[a],o);if(s)f||h&&(s.__html===h.__html||s.__html===l.innerHTML)||(l.innerHTML=s.__html),t.__k=[];else if(h&&(l.innerHTML=""),I(l,_(p)?p:[p],t,u,i,"foreignObject"===b?"http://www.w3.org/1999/xhtml":o,e,r,e?e[0]:u.__k&&M(u,0),f,c),null!=e)for(a=e.length;a--;)null!=e[a]&&g(e[a]);f||(a="value",void 0!==y&&(y!==l[a]||"progress"===b&&!y||"option"===b&&y!==m[a])&&L(l,a,y,m[a],o),a="checked",void 0!==w&&w!==l[a]&&L(l,a,w,m[a],o))}return l}function z(n,t,u){try{"function"==typeof n?n(t):n.current=t}catch(n){l.__e(n,u)}}function N(n,t,u){var i,o;if(l.unmount&&l.unmount(n),(i=n.ref)&&(i.current&&i.current!==n.__e||z(i,null,t)),null!=(i=n.__c)){if(i.componentWillUnmount)try{i.componentWillUnmount()}catch(n){l.__e(n,t)}i.base=i.__P=null}if(i=n.__k)for(o=0;o<i.length;o++)i[o]&&N(i[o],t,u||"function"!=typeof n.type);u||null==n.__e||g(n.__e),n.__c=n.__=n.__e=n.__d=void 0}function R(n,l,t){return this.constructor(n,t)}function q(t,u,i){var o,e,r,f;l.__&&l.__(t,u),e=(o="function"==typeof i)?null:i&&i.__k||u.__k,r=[],f=[],O(u,t=(!o&&i||u).__k=k(C,null,[t]),e||d,d,u.namespaceURI,!o&&i?[i]:e?null:u.firstChild?n.call(u.childNodes):null,r,!o&&i?i:e?e.__e:u.firstChild,o,f),V(r,t,f)}n=y.slice,l={__e:function(n,l,t,u){for(var i,o,e;l=l.__;)if((i=l.__c)&&!i.__)try{if((o=i.constructor)&&null!=o.getDerivedStateFromError&&(i.setState(o.getDerivedStateFromError(n)),e=i.__d),null!=i.componentDidCatch&&(i.componentDidCatch(n,u||{}),e=i.__d),e)return i.__E=i}catch(l){n=l}throw n}},t=0,u=function(n){return null!=n&&null==n.constructor},x.prototype.setState=function(n,l){var t;t=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=m({},this.state),"function"==typeof n&&(n=n(m({},t),this.props)),n&&m(t,n),null!=n&&this.__v&&(l&&this._sb.push(l),S(this))},x.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),S(this))},x.prototype.render=C,i=[],e="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,r=function(n,l){return n.__v.__b-l.__v.__b},$.__r=0,f=0,c=T(!1),a=T(!0),s=0,h={__proto__:null,render:q,hydrate:function n(l,t){q(l,t,n)},createElement:k,h:k,Fragment:C,createRef:function(){return{current:null}},isValidElement:u,Component:x,cloneElement:function(l,t,u){var i,o,e,r,f=m({},l.props);for(e in l.type&&l.type.defaultProps&&(r=l.type.defaultProps),t)"key"==e?i=t[e]:"ref"==e?o=t[e]:f[e]=void 0===t[e]&&void 0!==r?r[e]:t[e];return arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):u),b(l.type,f,i||l.key,o||l.ref,null)},createContext:function(n,l){var t={__c:l="__cC"+s++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var t,u;return this.getChildContext||(t=[],(u={})[l]=this,this.getChildContext=function(){return u},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&t.some(function(n){n.__e=!0,S(n)})},this.sub=function(n){t.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){t.splice(t.indexOf(n),1),l&&l.call(n)}}),n.children}};return t.Provider.__=t.Consumer.contextType=t},toChildArray:function n(l,t){return t=t||[],null==l||"boolean"==typeof l||(_(l)?l.some(function(l){n(l,t)}):t.push(l)),t},options:l},typeof module<"u"?module.exports=h:self.preact=h});
+!function(){function n(n){var t=e.get(this);return t||(t=new Map,e.set(this,t)),1<(t=p(this,t.get(n)||(t.set(n,t=function(n){function t(n){1===u&&(n||(r=r.replace(/^\s*\n\s*|\s*\n\s*$/g,"")))?p.push(0,n,r):3===u&&(n||r)?(p.push(3,n,r),u=2):2===u&&"..."===r&&n?p.push(4,n,0):2===u&&r&&!n?p.push(5,0,!0,r):5<=u&&((r||!n&&5===u)&&(p.push(u,0,r,s),u=6),n&&(p.push(u,n,0,s),u=6)),r=""}for(var e,s,u=1,r="",h="",p=[0],o=0;o<n.length;o++){o&&(1===u&&t(),t(o));for(var a=0;a<n[o].length;a++)e=n[o][a],1===u?"<"===e?(t(),p=[p],u=3):r+=e:4===u?r="--"===r&&">"===e?(u=1,""):e+r[0]:h?e===h?h="":r+=e:'"'===e||"'"===e?h=e:">"===e?(t(),u=1):u&&("="===e?(u=5,s=r,r=""):"/"===e&&(u<5||">"===n[o][a+1])?(t(),3===u&&(p=p[0]),(p=(u=p)[0]).push(2,0,u),u=0):" "===e||"\t"===e||"\n"===e||"\r"===e?(t(),u=2):r+=e),3===u&&"!--"===r&&(u=4,p=p[0])}return t(),p}(n)),t),arguments,[])).length?t:t[0]}var p=function(n,t,e,s){t[0]=0;for(var u=1;u<t.length;u++){var r=t[u++],h=t[u]?(t[0]|=r?1:2,e[t[u++]]):t[++u];3===r?s[0]=h:4===r?s[1]=Object.assign(s[1]||{},h):5===r?(s[1]=s[1]||{})[t[++u]]=h:6===r?s[1][t[++u]]+=h+"":r?(r=n.apply(h,p(n,h,e,["",null])),s.push(r),h[0]?t[0]|=2:(t[u-2]=0,t[u]=r)):s.push(h)}return s},e=new Map;"undefined"!=typeof module?module.exports=n:self.htm=n}();
+
+
+const { h, Component, render } = preact;
+const html = htm.bind(h);
+  
+  
+function separator_v(color='#95d2ef'){
+  return html`<div style='border-right:1px solid ${color}'></div>` 
+}
+
+function getCSSRule(ruleName) {
+  ruleName = ruleName.toLowerCase();
+  var result = null;
+  var find = Array.prototype.find;
+
+  find.call(document.styleSheets, styleSheet => {
+      result = find.call(styleSheet.cssRules, cssRule => {
+          return cssRule instanceof CSSStyleRule 
+              && cssRule.selectorText.toLowerCase() == ruleName;
+      });
+      return result != null;
+  });
+  return result;
+}
+
+       
+var LANG = {
+  cur : 0, // lang used
+
+  en : 0,
+  zh : 1,
+}
+
+
+if ('zh-CN' === navigator.language)
+    LANG.cur = LANG.zh
+else 
+    LANG.cur = LANG.en
+
+function L(...arg){
+  return arg[LANG.cur]
+}
+
+</script>
+
+
+
+<script id="content-render">
+
+
+function codeHL(timeout=1000) {
+  setTimeout(() => {
+    Prism.highlightAll()
+  }, timeout);  
+}
+
+class App extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      showPassed: true,
+      showFailed: true,
+      showStErr : true,
+    }
+        
+  }
+
+  
+  report_summary(){
+    return html`
+      <div class='test-summary-zone'>          
+        <div class='left prespace'>          
+          <div>${L('Test  Name','测试名称')} : ${report.name}</div>
+          <div>${L('Start Time','开始时间')} : ${report.start_time}</div>
+          <div>${L('End   Time','结束时间')} : ${report.end_time}  ⏱️= ${report.duration.toFixed(0)} ${L('Seconds','秒')}</div>
+        </div>
+      </div>  
+    `
+  }
+
+
+  report_stats(){
+    const stats = report.stats
+    return html`    
+      <div class='test-stats-zone' style='display:flex; gap:3rem;align-items:center;justify-content:center;background-color:#ecf5fc'>
+        <div style='display:flex; gap:1rem'> 
+  
+          <span>${L('Total','总计')} : ${stats.rtotal} </span>            
+          ${separator_v()} 
+  
+          
+  
+          ${ stats.deselected!=0&&
+          html`
+          <span>${L('Deselected','过滤掉')} : ${stats.deselected}</span>            
+          ${separator_v()} 
+          `
+          }
+  
+          ${ stats.passed!=0&&
+          html`
+          <span>${L('Passed','通过')} : ${stats.passed}</span>    
+          <input type="checkbox" defaultChecked='true'
+            onClick=${e=>{
+              this.setState({showPassed:e.target.checked})
+              if (e.target.checked) codeHL()  
+            }}
+          ></input>        
+          ${separator_v()} 
+          `
+          }
+  
+  
+          ${ stats.failed?
+          html`
+          <span style='${stats.failed===0? "":"color:red"}'>${L('Failed','不通过')} : ${stats.failed}</span>            
+          <input type="checkbox" defaultChecked='true'
+            onClick=${e=>{
+              this.setState({showFailed:e.target.checked})
+              if (e.target.checked) codeHL()  
+            }}
+          ></input>     
+          ${separator_v()} 
+          ` :null
+          }
+  
+          ${ stats.st_error?
+          html`
+          <span style='${stats.failed===0? "":"color:#9e438b"}'>${L('Errors','st错误')} : ${stats.st_error}</span>            
+          
+          <input type="checkbox" defaultChecked='true'
+            onClick=${e=>{
+              this.setState({showStErr:e.target.checked})
+              if (e.target.checked) codeHL()  
+            }}
+          ></input>       
+
+          ${separator_v()} 
+          ` :null
+          }
+      
+  
+          ${ stats.skipped!=0&&
+          html`
+          <span>${L('Skipped','忽略')} : ${stats.skipped}</span>            
+          ${separator_v()}           
+          `
+          }
+  
+  
+  
+          ${ stats.xfailed!=0&&
+          html`
+          <span>${L('Expected Failures','预期不通过')} : ${stats.xfailed}</span>            
+          `
+          }
+  
+        </div>
+        
+          
+        
+        <div style='display:flex; align-items:center; margin-left:2rem'>
+          <span>${L('Show Details','显示详情')}</span>
+          <input type="checkbox" id='show_details' defaultChecked='true'
+  
+          onClick=${e=>{
+            let value = document.getElementById('show_details').checked?'flex':'none'  
+                        
+            let rule = getCSSRule('.test-result .details');
+            rule.style.display = value;                        
+  
+            for (let e of document.querySelectorAll(".test-result .details")) {
+              e.style.display = value;
+            }
+  
+  
+          }}
+          ></input>
+        </div>
+          
+        
+      </div>
+        
+    `
+  }
+  
+  
+  
+  report_errors(){
+   
+    const ret = null
+    if (report.collect_errors && report.collect_errors.length)
+      return html`             
+        <div class="test-errors" style='color:#be2d2d; margin-bottom:1rem'>
+          <div style='font-weight:bold;margin-bottom:.5rem'>
+            ${L('Collection Errors:','搜集用例出错：')}
+          </div>
+  
+          
+          ${report.collect_errors.map(
+            e => html`<div style='white-space:pre-wrap'>${e}</div>`
+          )}
+          
+        </div>      
+    `  
+    return ret
+  }   
+  
+  _filterRuleOK(tr){
+    if( (!this.state.showPassed && tr.ret_c ==='passed') ||
+      (!this.state.showFailed && tr.ret_c ==='failed') ||
+      (!this.state.showStErr && (tr.ret_s ==='error' || tr.ret_t === 'error')) 
+    )
+      return false
+
+    return true
+  }
+
+
+  report_results(){
+  
+    
+    // 根据用例 sct 结果 决定用例nodid节点展示色彩
+    function case_overall_ret_style(tr){
+      let ret = ''
+      // ret_s, ret_t 可能取值： error, ok     'test-nodeid st_error': 'test-nodeid failed'
+      // ret_c 可能取值： passed, failed ,xpassed ,xfailed, skipped
+
+      // setup ok
+      if (tr.ret_s ==='ok'){ 
+        if (tr.ret_c ==='passed') { // call pass
+          if (tr.ret_t ==='ok') 
+            ret = 'passed'
+          else  
+            ret = 't_error'
+        }
+        else if (tr.ret_c ==='failed') { // call failed
+          ret = 'failed'
+        }
+        else  { // call ret is xpassed ,xfailed, skipped
+          
+        }
+      }
+
+      // setup error, call must not be executed
+      else { 
+        ret = 's_error'
+      }
+
+      return ret
+
+    }
+
+  
+    return report.results?
+      report.results.map( tr => 
+      this._filterRuleOK(tr) && html`
+  
+      <div class="test-result" >
+  
+        <div class=${'test-nodeid ' + case_overall_ret_style(tr)}      
+          onClick=${e=> {
+            let s = e.target.nextElementSibling.style
+            s.display = s.display !== "none" ? "none" : "flex"
+          }}
+        >${tr.nodeid}</div>
+       
+        
+        <div class="details">
+        ${ tr.sct.map(r => r.reprtext||r.output || r.logs ?
+          html`
+          <div class=${'report ' + r.when}>
+            <div class='report-title'> 
+              <div>${r.when}</div> 
+              <div>${r.duration}</div>
+            </div>
+            
+            ${
+              r.logs?html`
+              <div class="logs">
+                ${
+                  r.logs.map(item=>{
+                    const t = item.t
+                    if (t ==='img')
+                      return html`<img src='imgs/${item.src}'></img>`
+                    else if (t ==='txt')  
+                      return html`<span 
+                      style="color:${item.c?item.c:''}; font-weight:${item.w?item.w:''}">${item.s}</span>`
+                    return null
+                  }
+    
+                  )
+                }
+              </div>`:null
+            }
+            ${
+              r.output?html`
+              <div class="output text">
+                ${r.output}
+              </div>`:null
+            }
+            ${
+              r.reprtext?html`
+              <div class="reprtext">
+                <pre><code class="language-py">${r.reprtext}</code></pre> 
+              </div>`:null
+            }
+          </div>`
+          :null
+        )        
+        }
+        </div>
+  
+      </div>`
+      ):null
+  }   
+
+
+  render(){
+    return html`
+    <h2 style='text-align: center;'>${L('Testing Report','测试报告')} : ${report.name}</h2>
+    <div class='test-session'
+          style='background-Color:#f1f8fa'>
+          
+          <!-- summary -->           
+          ${this.report_summary()}
+          
+          
+          <!-- stats -->           
+          ${this.report_stats()} 
+                    
+          <!-- results -->   
+           
+          <div class="test-results-zone" 
+            style='padding:1rem; display: flex;flex-direction: column;gap: 2rem;'>   
+            ${this.report_errors()}
+            ${this.report_results()}            
+          </div>           
+          
+    </div> 
+    `
+
+  }
+}
+
+window.onload = function(){
+
+  document.getElementsByTagName('title')[0].innerHTML = L('Testing Report : ','测试报告 : ') + report.name
+
+  render(html`<${App} name="World" />`, document.querySelector('main'));
+
+
+  codeHL()  
+
+}
+
+
+
+
+</script>    
+
+
+
+
+
+
+<script id="data">
+  
+  var report = {
+    "name": "file1",
+    "duration": 7.046,
+    "start_time": "20240616 22:23:43",
+    "end_time": "20240616 22:23:50",
+    "stats": {
+      "total": 6,
+      "deselected": 0,
+      "rtotal": 6,
+      "executed": 6,
+      "passed": 5,
+      "failed": 1,
+      "skipped": 0,
+      "xfailed": 0,
+      "xpassed": 0,
+      "st_error": 0
+    },
+    "results": [
+      {
+        "idx": 1,
+        "nodeid": "cases/test_我的1.py::Test_错误密码::test_C001001",
+        "ret_s": "ok",
+        "ret_c": "passed",
+        "ret_t": "ok",
+        "sct": [
+          {
+            "when": "setup",
+            "outcome": "ok",
+            "duration": 0.001,
+            "logs": [],
+            "reprtext": "",
+            "output": "=== 初始化-类 ===\n--- 初始化-方法  ---\n"
+          },
+          {
+            "when": "call",
+            "outcome": "passed",
+            "duration": 1.001,
+            "logs": [
+              {
+                "t": "txt",
+                "s": "\nStep #1  ",
+                "c": "green"
+              },
+              {
+                "t": "txt",
+                "s": "打开登录界面\n",
+                "c": "green"
+              },
+              {
+                "t": "txt",
+                "s": "进行登录进行\n"
+              },
+              {
+                "t": "txt",
+                "s": "\nStep #2  ",
+                "c": "green"
+              },
+              {
+                "t": "txt",
+                "s": "验证登录后界面 需要更多的测试结果\n",
+                "c": "green"
+              },
+              {
+                "t": "txt",
+                "s": "登录成功\n\n\n\n\n"
+              },
+              {
+                "t": "txt",
+                "s": "登录成功2\n\n\n"
+              },
+              {
+                "t": "txt",
+                "s": "登录成功3"
+              },
+              {
+                "t": "txt",
+                "s": "登录成功4\n"
+              }
+            ],
+            "reprtext": "",
+            "output": ""
+          },
+          {
+            "when": "teardown",
+            "outcome": "ok",
+            "duration": 0.001,
+            "logs": [],
+            "reprtext": "",
+            "output": "--- 清除  -方法 ---\n"
+          }
+        ]
+      },
+      
+      {
+        "idx": 3,
+        "nodeid": "cases/test_我的1.py::Test_错误密码::test_C001003",
+        "ret_s": "ok",
+        "ret_c": "failed",
+        "ret_t": "ok",
+        "sct": [
+          {
+            "when": "setup",
+            "outcome": "ok",
+            "duration": 0.0,
+            "logs": [],
+            "reprtext": "",
+            "output": "--- 初始化-方法  ---\n"
+          },
+          {
+            "when": "call",
+            "outcome": "failed",
+            "duration": 1.001,
+            "logs": [
+              {
+                "t": "txt",
+                "s": "\nStep #1  ",
+                "c": "green"
+              },
+              {
+                "t": "txt",
+                "s": "打开登录界面\n",
+                "c": "green"
+              },
+              {
+                "t": "txt",
+                "s": "进行登录进行登录进行登\n"
+              }
+            ],
+            "reprtext": "self = <test_我的1.Test_错误密码 object at 0x00000232AD60C2D0>\n\n    @pytest.mark.critical\n    def test_C001003(self):\n        print('用例C001003')\n    \n        log_step(1, '打开登录界面')\n        log_str('进行登录' * 40)\n    \n        count = [1, 3, 5]\n        sleep(1)\n>       assert count == [1, 3, 6]\nE       assert [1, 3, 5] == [1, 3, 6]\nE         At index 2 diff: 5 != 6\nE         Use -v to get more diff\n\ncases\\test_我的1.py:58: AssertionError",
+            "output": "用例C001003\n"
+          },
+          {
+            "when": "teardown",
+            "outcome": "ok",
+            "duration": 0.0,
+            "logs": [],
+            "reprtext": "",
+            "output": "--- 清除  -方法 ---\n"
+          }
+        ]
+      }
+     
+    ],
+    "collect_errors": []
+  }
+
+
+  LANG.cur = 0
+</script>  
+
+
+
+
+
+
