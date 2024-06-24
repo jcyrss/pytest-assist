@@ -36,6 +36,7 @@ Just run `pip install pytest-assist`
 
 ## Quick Start
 
+### With GUI
 
 To launch `PA`， open terminal window, enter the **root directory** of your pytest project.
 
@@ -92,6 +93,18 @@ The GUI is like the following
 Just click "Test Params Setting" to open settings and click  `Run Testing`  to start a complete testing.
 
 ![image](https://github.com/jcyrss/baiyueheiyu/assets/10496014/e290610b-effe-45c6-b4d0-9303d83d4e79)
+
+
+
+### Report Only
+
+If you just want PA to create report without GUI needed, just run pytest like this
+
+```py
+python -m pytest -p pytest_assist.plugin --assist-report=myreport.html
+```
+
+
 
 
 ## Pick Tests
