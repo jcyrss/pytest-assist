@@ -39,3 +39,10 @@ else :
 
 def L(*arg):
     return arg[LANG.cur]
+
+
+
+REPORT_TEMPLATE_PATH = os.path.join(LIB_PATH, 'export_report.html')
+
+with open(REPORT_TEMPLATE_PATH,'r',encoding='utf8') as f:
+    REPORT_HTML_CONTENT = f.read()

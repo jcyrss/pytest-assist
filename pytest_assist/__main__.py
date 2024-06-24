@@ -1,6 +1,6 @@
 import pytest, os, traceback, sys, threading, shutil, argparse, json, time, zipfile
 from .servers import runServers, registClientMsgHandler, broadcastToClients
-from .shared import Testing_State, Settings, LIB_PATH, L, LANG
+from .shared import Testing_State, Settings, LIB_PATH, L, LANG, REPORT_HTML_CONTENT
 from .version import VERSION
 
 
@@ -528,12 +528,6 @@ if __name__ == '__main__':
     os.makedirs(Settings.RECORDS_DIR,  exist_ok=True)   
     os.makedirs(Settings.RULES_DIR,    exist_ok=True)  
     
-
-    REPORT_TEMPLATE_PATH = os.path.join(LIB_PATH, 'export_report.html')
-
-    with open(REPORT_TEMPLATE_PATH,'r',encoding='utf8') as f:
-        REPORT_HTML_CONTENT = f.read()
-
     
     methodNames = [attr for attr in dir(CliMsgHandlers) if not attr.startswith('__')]
     for mn in methodNames :

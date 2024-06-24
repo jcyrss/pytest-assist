@@ -4,7 +4,7 @@ from typing import List
 
 from .servers import broadcastToClients, registClientMsgHandler, EnhancedJSONEncoder
 
-from .shared import Testing_State, Settings, L
+from .shared import Testing_State, Settings, L, REPORT_HTML_CONTENT, LANG
 
 def _getWindowsVersion():
     version = platform.release()
@@ -97,6 +97,15 @@ def _createTE():
 #  https://docs.pytest.org/en/7.1.x/reference/reference.html#hooks
 
 def pytest_addoption(parser):
+
+    
+    parser.addoption(
+        "--assist-report",
+        default=None,
+        help="pytest assist report file",
+    )
+
+
     def str2bool(v):
         if isinstance(v, bool):
             return v
@@ -151,6 +160,25 @@ def _saveTestRecord():
         with open(te.recordFilePath, 'w', encoding='utf8') as f:
             json.dump(te, f, cls=EnhancedJSONEncoder, 
                       ensure_ascii=False, indent=2)
+            
+# only when pytest assist is used as plugin by pytest directly in command line
+# like : python -m pytest -p pytest_assist.plugin --assist-report=myreport.html
+def _saveReport(assist_report):            
+    # nee to create report file directly
+    if assist_report is not None:
+        reportPath = 'report.html' if assist_report=='' else assist_report
+
+        with open(reportPath, 'w', encoding='utf8') as f:
+            report_data_json = json.dumps(te, cls=EnhancedJSONEncoder, 
+                      ensure_ascii=False, indent=2)
+            
+            f.write(REPORT_HTML_CONTENT)
+            
+            f.write('\n\n<script id="data">\n\nvar report = ')
+            f.write(report_data_json)
+            f.write(f'\n\nLANG.cur = {LANG.cur}\n\n</script>')
+    
+    
 
 def pytest_unconfigure(config):
     global te
@@ -159,8 +187,11 @@ def pytest_unconfigure(config):
 
     te.end_time = time.time()
 
+    
+
     try:
         _saveTestRecord()
+        _saveReport(config.option.assist_report)
     except:
         pass
     
