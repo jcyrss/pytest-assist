@@ -29,7 +29,6 @@ if is_port_in_use(Settings.ws_port):
     print(f'WS PORT {Settings.ws_port} already in use, exit')
     os._exit(0)
 
-
 def runHttpServer():
 
 
@@ -45,6 +44,9 @@ def runHttpServer():
                              directory=os.path.join(LIB_PATH,'z_dist'),
                              **kwargs)
     
+            super().extensions_map.update({
+                ".js": "application/javascript",
+            });
 
         # find request file in differnt root dirs
         # refer to https://stackoverflow.com/a/20409103
@@ -66,7 +68,7 @@ def runHttpServer():
                 self.send_header("Content-length", length)
             self.end_headers()
 
-
+             
         def do_POST(self):
          
             content_len = int(self.headers.get('Content-Length'))
@@ -137,7 +139,7 @@ def broadcastToClients(info):
         runningLoop.call_soon_threadsafe(task, json.dumps(info, cls=EnhancedJSONEncoder))
 
 clientMsgHandlers = {}
-def registClientMsgHandler(event,handler):
+def registClientMsgHandler(event, handler):
     clientMsgHandlers[event] = handler
 
 

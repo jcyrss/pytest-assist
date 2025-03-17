@@ -531,7 +531,7 @@ if __name__ == '__main__':
     
     methodNames = [attr for attr in dir(CliMsgHandlers) if not attr.startswith('__')]
     for mn in methodNames :
-        registClientMsgHandler(mn, getattr(CliMsgHandlers,mn))
+        registClientMsgHandler(mn, getattr(CliMsgHandlers, mn))
 
 
     handleArguments()
