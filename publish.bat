@@ -1,6 +1,7 @@
-del /S /Q  dist\*.*
-RMDIR "build" /S /Q
+rd /s /q  dist
+rd /s /q  build
+rd /s /q  pytest_assist.egg-info
 
+python -m build --wheel && twine upload dist/*.whl
 
-python setup.py bdist_wheel && twine upload dist/*
 pause

@@ -147,14 +147,16 @@ def registClientMsgHandler(event, handler):
 
 def runWebSocketServer():    
 
-    async def router(connection, path):
+    async def router(connection):
         print(f'client connected from', connection.remote_address)
-        if path == "/client":
-            wsc_clients.add(connection)
+        ## parameter `path` is deprecated in lib websockets since version 13.0
+        ## refer to https://stackoverflow.com/q/79464875/2602410
+        # if path == "/client":
+        #     wsc_clients.add(connection)
         # elif path == "/runner":
         #     await get_shaded_area(websocket)
-        else:
-            return
+        # else:
+        #     return
 
         while True:
             try:

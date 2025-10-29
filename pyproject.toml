@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytest-assist"
+dynamic = ["version"]
+authors = [
+  {name = "Jiang Chunyang 白月黑羽-江春阳", email = "jcyrss@gmail.com"},
+]
+description = "pytest plugin library"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.8"
+keywords = ["pytest", "automation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "pytest",
+    "websockets>=15.0.1", 
+]
+
+[project.urls]
+Homepage = "https://jcyrss.github.io/pytest-assist"
+Download = "https://pypi.python.org/pypi/pytest-assist"
+
+[tool.setuptools.packages.find]
+include = ["pytest_assist*"]
+
+# specify non-code files that should be included within your Python package
+[tool.setuptools.package-data]
+"*" = ["*.*"]
